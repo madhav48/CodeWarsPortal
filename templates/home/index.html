@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>
+        CodeWars - Dashboard
+    </title>
+
+
+    <!-- Sweet Alert -->
+    <link type="text/css" href="{{ config.ASSETS_ROOT }}/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <!-- Notyf -->
+    <link type="text/css" href="{{ config.ASSETS_ROOT }}/vendor/notyf/notyf.min.css" rel="stylesheet">
+
+    <!-- Volt CSS -->
+    <link type="text/css" href="{{ config.ASSETS_ROOT }}/css/volt.css" rel="stylesheet">
+
+    <!-- This is for display code..  -->
+    <style>
+        .code-editor {
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        #python-code {
+            width: 100%;
+            height: 300px;
+            padding: 10px;
+            font-family: monospace;
+            /* Use a monospaced font for code readability */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header class="header-global">
+        <nav id="navbar-main" aria-label="Primary navigation"
+            class="navbar navbar-main navbar-expand-lg navbar-theme-primary pt-4 navbar-dark">
+            <div class="container position-relative">
+                <div class="navbar-collapse collapse me-auto" id="navbar_global">
+                    <div class="navbar-collapse-header">
+                        <div class="row">
+                            <div class="col-6 collapse-brand">
+                                <a href="/">
+                                    <img src="{{ config.ASSETS_ROOT }}/img/brand/light.svg" alt="Volt logo">
+                                </a>
+                            </div>
+                            <div class="col-6 collapse-close">
+                                <a href="#navbar_global" class="fas fa-times" data-toggle="collapse"
+                                    data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false"
+                                    title="close" aria-label="Toggle navigation"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="d-flex align-items-center ms-auto">
+                    <a href="{{ url_for('logout') }}"
+                        class="btn btn-outline-white d-inline-flex align-items-center me-md-3">
+                        LogOut
+                    </a>
+                    <button class="navbar-toggler ml-2" type="button" data-toggle="collapse"
+                        data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Hero -->
+        <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-12 text-center">
+
+                        <h1 class="fw-bolder">Hello {{current_user.name}}!</h1>
+                        <br><br>
+
+                        <div>
+
+                            {% if team_name%}
+
+                            <h4>You have joined team {{team_name}}!!</h4>
+                            <br>
+
+                            {% else %}
+                            <h4>You have not joined any team!!</h4>
+                            <br>
+
+                            <div class="d-flex align-items-center justify-content-center mb-5">
+                                <a href="{{url_for('create_team')}}"
+                                    class="btn btn-secondary d-inline-flex align-items-center me-4">
+                                    Create Team
+                                </a>
+                                <a href="{{url_for('join_team')}}"
+                                    class="btn btn-secondary d-inline-flex align-items-center me-4">
+                                    Join Team
+                                </a>
+                            </div>
+
+                            {% endif %}
+
+                            <p><i>Hoist the Jolly Roger of your gaming prowess high, me hearties! It's time to show the
+                                    world the true meaning of skill and strategy! 💎🎮"</i></p>
+
+
+                            <br><br><br>
+                            {% if team_name%}
+                            <h4>To edit your script scroll below!</h4>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <figure class="position-absolute bottom-0 left-0 w-100 d-none d-md-block mb-n2"><svg class="home-pattern"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 185.4">
+                    <path d="M3000,0v185.4H0V0c496.4,115.6,996.4,173.4,1500,173.4S2503.6,115.6,3000,0z"></path>
+                </svg></figure>
+        </section>
+
+        <br>
+
+        {% if script %}
+
+        <section class="section section-lg bg-soft pt-0">
+            <div class="container">
+
+                <div class="code-editor">
+                    <form id="save-form" action="/savescript" method="post" class="text-center">
+                        <textarea id="script" name="script" rows="15" cols="80">{{script}}</textarea>
+                        <br>
+                        <input type="file" id="fileInput" name="fileInput" style="display: none;">
+                        <!-- Button to upload code... -->
+                        <button type="button" class="btn btn-primary"
+                            onclick="document.getElementById('fileInput').click();">Upload File</button>
+                        <!--  Buton to save.. -->
+                        <button type="submit" class="btn btn-primary" id="savescript" name="savescript">Save</button>
+                    </form>
+                </div>
+
+
+        </section>
+
+
+        {% endif %}
+    </main>
+
+    <script>
+
+        document.getElementById('fileInput').addEventListener('change', function (e) {
+            var file = e.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var content = e.target.result;
+                document.getElementById('script').value = content;
+            };
+
+            reader.readAsText(file);
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

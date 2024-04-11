@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>
+        CodeWars - Home
+    </title>
+
+    <!-- Sweet Alert -->
+    <link type="text/css" href="{{ config.ASSETS_ROOT }}/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+
+    <!-- Notyf -->
+    <link type="text/css" href="{{ config.ASSETS_ROOT }}/vendor/notyf/notyf.min.css" rel="stylesheet">
+
+    <!-- Volt CSS -->
+    <link type="text/css" href="{{ config.ASSETS_ROOT }}/css/volt.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+        <div class="container ">
+            <div class="row">
+                <div class="col-12 text-center">
+
+                    <h1 class="fw-bolder">Welcome to the CodeWars Portal!</h1>
+                    <br><br>
+
+                    <div>
+
+                        <p><i>Avast, me hearties! Prepare to plunge into the depths of the gaming seas! Click below to
+                                embark on your daring voyage into the gaming arena, where treasures await and adventures
+                                abound!⚓🎮</i></p>
+
+                        <br>
+
+                        <div class="d-flex align-items-center justify-content-center mb-5">
+                            <a href="{{url_for('login')}}"
+                                class="btn btn-secondary d-inline-flex align-items-center me-4">
+                                Login
+                            </a>
+                            <a href="{{url_for('register')}}"
+                                class="btn btn-secondary d-inline-flex align-items-center me-4">
+                                Register
+                            </a>
+                        </div>
+
+                        <h4> Let the gaming saga begin! 💥</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</body>
+
+</html>

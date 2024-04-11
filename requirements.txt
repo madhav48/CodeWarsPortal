@@ -1,0 +1,13 @@
+Requirements..
+
+flask_login
+flask_sqlalchemy 
+config
+random
+os
+hashlib
+binascii
+re
+flask_wtf
+wtforms
+string
